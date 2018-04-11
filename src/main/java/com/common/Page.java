@@ -13,13 +13,21 @@ public class Page {
 
     private HttpServletResponse response;
 
-    private Cookie cookie;
+    private Cookie[] cookie;
 
     private Timestamp startTime;
 
     private Timestamp endTime;
 
     private User user;
+
+    public Cookie[] getCookie() {
+        return cookie;
+    }
+
+    public void setCookie(Cookie[] cookie) {
+        this.cookie = cookie;
+    }
 
     public User getUser() {
         return user;
@@ -59,13 +67,5 @@ public class Page {
 
     public void setResponse(HttpServletResponse response) {
         this.response = response;
-    }
-
-    public Cookie getCookie() {
-        return cookie;
-    }
-
-    public void setCookie(Cookie cookie) {
-        this.cookie = cookie;
     }
 }
