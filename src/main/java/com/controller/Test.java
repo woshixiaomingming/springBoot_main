@@ -9,5 +9,7 @@ public class Test {
     @RequestMapping("/main")
     public String test () {
         return "ok";
+
+
     }
 }
