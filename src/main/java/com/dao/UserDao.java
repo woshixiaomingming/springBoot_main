@@ -25,6 +25,6 @@ public class UserDao extends Data {
      */
     public User findUserById (int id) {
         String sql = "select * from user where id = ?";
-        return getOne(sql, new Object[]{id}, User.class);
+        return GetOne(sql, new Object[]{id}, User.class);
     }
 }
