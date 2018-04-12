@@ -53,6 +53,11 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
             }
             //存储cookie
         }
+        Cookie cookie = new Cookie("uuids", "11122222");
+        cookie.setMaxAge(60*60*24);
+        cookie.setPath("/");
+        cookie.setDomain("main.com");
+        response.addCookie(cookie);
         page.setCookie(cookies);
         return true;
     }
