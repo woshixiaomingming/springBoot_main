@@ -27,4 +27,9 @@ public class UserDao extends Data {
         String sql = "select * from user where id = ?";
         return GetOne(sql, new Object[]{id}, User.class);
     }
+
+    public User findByUsernameAndPwd (String username, String password) {
+        String sql = "select * from user where username = ? and password = ?";
+        return getOne(sql, new Object[]{username, password}, User.class);
+    }
 }
