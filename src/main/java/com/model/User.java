@@ -26,6 +26,16 @@ public class User extends Bean {
 
     private int status;
 
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public Timestamp getRegisterTime() {
         return registerTime;
     }
