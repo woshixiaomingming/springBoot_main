@@ -30,6 +30,6 @@ public class UserDao extends Data {
 
     public User findByUsernameAndPwd (String username, String password) {
         String sql = "select * from user where username = ? and password = ?";
-        return getOne(sql, new Object[]{username, password}, User.class);
+        return GetOne(sql, new Object[]{username, password}, User.class);
     }
 }
