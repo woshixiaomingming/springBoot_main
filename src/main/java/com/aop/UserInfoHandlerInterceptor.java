@@ -67,7 +67,11 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
+        /*Cookie cookie = new Cookie("uid", "1");
+        cookie.setMaxAge(60*60*2);
+        cookie.setDomain("/main");
+        cookie.setPath("/");
+        response.addCookie(cookie);*/
     }
 
     /**
@@ -80,6 +84,10 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
+        Cookie cookie = new Cookie("uid", "1");
+        cookie.setMaxAge(60*60*2);
+        cookie.setDomain("/main");
+        cookie.setPath("/");
+        response.addCookie(cookie);
     }
 }
