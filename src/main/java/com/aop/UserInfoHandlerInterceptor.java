@@ -1,18 +1,22 @@
 package com.aop;
 
 import com.common.Page;
+import com.controller.Base;
 import com.dao.UserDao;
 import com.model.User;
-import com.util.AddPage;
 import com.util.TimeUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class UserInfoHandlerInterceptor implements HandlerInterceptor {
 
@@ -41,7 +45,7 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
 
         } else if (null != cookies || cookies.length > 0) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName() == "uid") {
+                if (cookie.getName() == "uuid") {
                     String uid = cookie.getValue();
                     if (StringUtils.isBlank(uid)) {
                         return false;
@@ -52,13 +56,9 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
                 }
             }
             //存储cookie
+            page.setCookie(cookies);
         }
-        Cookie cookie = new Cookie("uuids", "11122222");
-        cookie.setMaxAge(60*60*24);
-        cookie.setPath("/");
-        cookie.setDomain("main.com");
-        response.addCookie(cookie);
-        page.setCookie(cookies);
+        Base.set(page);
         return true;
     }
 
@@ -72,11 +72,7 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        /*Cookie cookie = new Cookie("uid", "1");
-        cookie.setMaxAge(60*60*2);
-        cookie.setDomain("/main");
-        cookie.setPath("/");
-        response.addCookie(cookie);*/
+        Base.set(null);
     }
 
     /**
@@ -89,10 +85,6 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        Cookie cookie = new Cookie("uid", "1");
-        cookie.setMaxAge(60*60*2);
-        cookie.setDomain("/main");
-        cookie.setPath("/");
-        response.addCookie(cookie);
+
     }
 }

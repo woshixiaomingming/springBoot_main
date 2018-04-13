@@ -16,6 +16,9 @@ public class User extends Bean {
 
     private Timestamp lastLoginTime;
 
+    /**
+     * 性别 0---男，1---女，2-----人妖
+     */
     private int sex;
 
     private String photo;
@@ -24,9 +27,29 @@ public class User extends Bean {
 
     private boolean isDelete;
 
+    /**
+     * 状态 0---正常，1---冻结
+     */
     private int status;
 
     private int age;
+
+    public User (String username, Timestamp registerTime, String password, Timestamp lastLoginTime, int sex, String photo, String loginIp, boolean isDelete, int status, int age) {
+        this.username = username;
+        this.registerTime = registerTime;
+        this.password = password;
+        this.lastLoginTime = lastLoginTime;
+        this.sex = sex;
+        this.photo = photo;
+        this.loginIp = loginIp;
+        this.isDelete = isDelete;
+        this.status = status;
+        this.age = age;
+    }
+
+    public User () {
+
+    }
 
     public int getAge() {
         return age;
@@ -115,4 +138,5 @@ public class User extends Bean {
     public void setUsername(String username) {
         this.username = username;
     }
+
 }
