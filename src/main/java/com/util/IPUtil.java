@@ -1,10 +1,15 @@
 package com.util;
 
 import com.common.Page;
+import com.controller.Base;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
+import java.net.URL;
 
 public class IPUtil {
+
+    private static Logger logger = Logger.getLogger(IPUtil.class);
 
     public static String getIP (Page page) {
         String ip = page.getRequest().getHeader("x-forwarded-for");
@@ -29,5 +34,34 @@ public class IPUtil {
             }
         }
         return ip;
+    }
+
+    /**
+     * 获取referer中的信息防范crsf攻击
+     * @return
+     */
+    public static boolean getReferer () {
+        Page page = Base.get();
+        String referer = page.getRequest().getHeader("Referer");
+        String ip = getIP(page);
+        if (StringUtils.isBlank(referer) && !ip.equals("127.0.0.1")) {
+            logger.error("非法referer，可能的csrf攻击，来源ip为：" + ip);
+            return false;
+        }
+        //判断域名是否是指定域名下的请求
+        URL url = null;
+        try {
+            url = new URL(referer);
+            if (url.getHost().equals(GlobalConfig.getValue("referer_main"))) {
+                return true;
+            } else {
+                logger.error("非法referer，可能的csrf攻击，来源ip为：" + ip);
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("referer判断出现异常：" + e);
+            return false;
+        }
     }
 }

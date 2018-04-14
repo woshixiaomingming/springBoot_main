@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.common.Page;
 import com.dao.UserDao;
 import com.entity.Message;
+import com.entity.enums.UserLoginStatus;
+import com.entity.enums.UserStatus;
 import com.entity.webEntity.UserEntity;
 import com.model.User;
 import com.util.AddPageUtil;
@@ -39,7 +41,9 @@ public class UserService {
             //数据库数据反射到接口数据
             UserEntity userEntity = reflex.getRtnInfo(UserEntity.class, user);
             json.put("data", userEntity);
-            AddPageUtil.addCookie(String.valueOf(user.getId()), page);
+            new AddPageUtil().addCookie(String.valueOf(user.getId()), page);
+            page.setUser(user);
+            page.setIsLogin(UserLoginStatus.SUCCESS.getKey());
             return json;
         }
     }
@@ -70,7 +74,9 @@ public class UserService {
             Message msg = new Message("1000", "SUCCESS");
             JSONObject json = msg.getReturnInfo();
             json.put("data", reflex.getRtnInfo(UserEntity.class, user));
-            AddPageUtil.addCookie(String.valueOf(user.getId()), page);
+            new AddPageUtil().addCookie(String.valueOf(user.getId()), page);
+            page.setUser(user);
+            page.setIsLogin(UserLoginStatus.SUCCESS.getKey());
             return json;
         }
         Message msg = new Message("1001", "FAIL");
@@ -78,4 +84,12 @@ public class UserService {
         return json;
     }
 
+
+    public JSONObject getUserInfo () {
+        AddPageUtil addPageUtil = new AddPageUtil();
+        Message msg = new Message("1000", "SUCCESS");
+        JSONObject json = msg.getReturnInfo();
+        json.put("user", addPageUtil.userId());
+        return json;
+    }
 }

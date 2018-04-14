@@ -6,6 +6,7 @@ import com.dao.UserDao;
 import com.model.User;
 import com.util.TimeUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -17,9 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 
+/**
+ * 处理page对象
+ */
 public class UserInfoHandlerInterceptor implements HandlerInterceptor {
 
+    private static Logger logger = Logger.getLogger(UserInfoHandlerInterceptor.class);
 
     @Autowired
     private UserDao userDao;
@@ -36,28 +42,11 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("拦截");
         Page page = new Page();
-        //服务启动的时间
         page.setStartTime(TimeUtil.getNow());
         page.setRequest(request);
         page.setResponse(response);
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null || cookies.length < 1) {
-
-        } else if (null != cookies || cookies.length > 0) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName() == "uuid") {
-                    String uid = cookie.getValue();
-                    if (StringUtils.isBlank(uid)) {
-                        return false;
-                    } else {
-                        User user = userDao.findUserById(Integer.valueOf(uid));
-                        page.setUser(user);
-                    }
-                }
-            }
-            //存储cookie
-            page.setCookie(cookies);
-        }
+        //当前的cookie信息
+        page.setCookie(request.getCookies());
         Base.set(page);
         return true;
     }
@@ -72,6 +61,9 @@ public class UserInfoHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        long startTime = Base.get().getStartTime().getTime();
+        long endTime = System.currentTimeMillis();
+        logger.info("请求完成时间：" + (endTime - startTime) + "ms");
         Base.set(null);
     }
 

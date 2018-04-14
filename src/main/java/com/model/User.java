@@ -139,4 +139,20 @@ public class User extends Bean {
         this.username = username;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", registerTime=" + registerTime +
+                ", password='" + password + '\'' +
+                ", lastLoginTime=" + lastLoginTime +
+                ", sex=" + sex +
+                ", photo='" + photo + '\'' +
+                ", loginIp='" + loginIp + '\'' +
+                ", isDelete=" + isDelete +
+                ", status=" + status +
+                ", age=" + age +
+                '}';
+    }
 }

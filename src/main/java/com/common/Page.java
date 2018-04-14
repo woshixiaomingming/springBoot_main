@@ -21,6 +21,19 @@ public class Page {
 
     private User user;
 
+    /**
+     * 0----代表未登陆，1---代表以登陆
+     */
+    private int isLogin = 0;
+
+    public int getIsLogin() {
+        return isLogin;
+    }
+
+    public void setIsLogin(int isLogin) {
+        this.isLogin = isLogin;
+    }
+
     public Cookie[] getCookie() {
         return cookie;
     }
