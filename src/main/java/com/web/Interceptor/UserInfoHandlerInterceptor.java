@@ -1,24 +1,16 @@
-package com.aop;
+package com.web.Interceptor;
 
 import com.common.Page;
 import com.controller.Base;
 import com.dao.UserDao;
-import com.model.User;
 import com.util.TimeUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.sql.Timestamp;
 
 /**
  * 处理page对象
