@@ -16,7 +16,7 @@ public class GlobalConfig {
         }
 
         public static void getInstance () {
-            if (config == null) {
+            if (null == config) {
                 synchronized (lock) {
                     config = new GlobalConfig();
                 }
@@ -24,7 +24,7 @@ public class GlobalConfig {
         }
 
         public static String getValue (String key) {
-            if (config == null) {
+            if (null == config) {
                 getInstance();
             }
             try {

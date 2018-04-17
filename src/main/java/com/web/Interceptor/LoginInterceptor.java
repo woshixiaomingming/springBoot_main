@@ -13,8 +13,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        httpServletResponse.sendRedirect("./templates/hello.html");
-        return false;
+        //httpServletResponse.sendRedirect("templates/register.html");
+        return true;
     }
 
     @Override
