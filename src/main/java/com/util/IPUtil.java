@@ -52,7 +52,7 @@ public class IPUtil {
         URL url = null;
         try {
             url = new URL(referer);
-            if (url.getHost().equals(GlobalConfig.getValue("referer_main"))) {
+            if (url.getHost().equals(MainGlobalConfig.getValue("referer_main"))) {
                 return true;
             } else {
                 logger.error("非法referer，可能的csrf攻击，来源ip为：" + ip);

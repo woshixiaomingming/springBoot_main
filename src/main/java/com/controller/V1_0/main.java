@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.controller.Base;
 import com.entity.enums.UserStatus;
 import com.service.UserService;
+import com.util.GlobalConfig;
 import com.util.IPUtil;
 import com.util.PhotoInfoUtil;
 import org.springframework.beans.factory.annotation.Autowired;

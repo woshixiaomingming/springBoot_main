@@ -2,14 +2,14 @@ package com.util;
 
 import java.util.ResourceBundle;
 
-public class GlobalConfig {
+public class MainGlobalConfig {
 
         private static ResourceBundle rb = null;
-        private static GlobalConfig config = null;
+        private static MainGlobalConfig config = null;
         private static Object lock = new Object();
         private static String config_file = "main";
 
-        public GlobalConfig() {
+        public MainGlobalConfig() {
             if (rb == null) {
                rb = ResourceBundle.getBundle(config_file);
             }
@@ -18,7 +18,7 @@ public class GlobalConfig {
         public static void getInstance () {
             if (null == config) {
                 synchronized (lock) {
-                    config = new GlobalConfig();
+                    config = new MainGlobalConfig();
                 }
             }
         }
@@ -28,7 +28,11 @@ public class GlobalConfig {
                 getInstance();
             }
             try {
-                return rb.getString(key) == null ? null : rb.getString(key);
+                if (null == rb) {
+                    return null;
+                } else {
+                    return rb.getString(key);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
