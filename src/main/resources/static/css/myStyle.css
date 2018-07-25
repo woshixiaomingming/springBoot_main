@@ -1,0 +1,19 @@
+html,body{
+    height: 100%;
+    width: 100%;
+}
+.boyDiv{
+    border: 2px solid red;
+    width: 20%;
+    height: 30%;
+    margin-left: 40%;
+    margin-bottom: 35%;
+    margin-top: 25%;
+}
+.myStyle{
+    border: 2px solid blue;
+    width: 80%;
+    height: 80%;
+    margin-top: 10%;
+    margin-left: 10%;
+}

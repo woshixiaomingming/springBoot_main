@@ -4,6 +4,7 @@ import com.util.Bean;
 
 import java.sql.Timestamp;
 
+
 public class User extends Bean {
 
     private int id;
