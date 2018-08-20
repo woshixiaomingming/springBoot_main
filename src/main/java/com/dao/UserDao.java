@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.model.User;
+import com.util.BaseSql;
 import com.util.Data;
 import com.util.PhotoInfoUtil;
 import com.util.TimeUtil;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserDao extends Data {
+public class UserDao extends BaseSql<User> {
 
     /**
      * 根据用户id查询用户信息
@@ -18,7 +19,7 @@ public class UserDao extends Data {
      */
     public User findUserById (int id) {
         String sql = "select * from user where id = ? and isDelete = false";
-        return GetOne(sql, new Object[]{id}, User.class);
+        return GetOne(sql, new Object[]{id});
     }
 
     /**
@@ -29,7 +30,7 @@ public class UserDao extends Data {
      */
     public User findByUsernameAndPwd (String username, String password) {
         String sql = "select * from user where username = ? and password = ? and isDelete = false";
-        return GetOne(sql, new Object[]{username, password}, User.class);
+        return GetOne(sql, new Object[]{username, password});
     }
 
     /**

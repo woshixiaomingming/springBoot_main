@@ -1,10 +1,12 @@
 package com.model;
 
+import com.annototion.DataModel;
 import com.util.Bean;
 
 import java.sql.Timestamp;
 
-
+//@DataModel(dateBase = "main", username = "xmm", password = "123456", dataIp = "111.230.200.163", isDefealt = true)
+@DataModel(dateBase = "main")
 public class User extends Bean {
 
     private int id;

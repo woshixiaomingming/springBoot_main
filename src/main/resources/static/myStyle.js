@@ -42,3 +42,7 @@ function MyStyle() {
     boyDiv.appendTo(parentDiv);
 }
 
+
+var Dd = function () {
+    console.log(11);
+}

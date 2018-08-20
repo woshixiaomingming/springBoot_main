@@ -25,7 +25,7 @@ public class IPUtil {
         }
 
         if(ip.indexOf(",") >= 0){
-            //log.error("x-forwarded-for:" + ip + ",");
+            //log.exception("x-forwarded-for:" + ip + ",");
             String[] ips = ip.split(",");
             for(int i = 0; i < ips.length; i++){
                 ip = ips[i];

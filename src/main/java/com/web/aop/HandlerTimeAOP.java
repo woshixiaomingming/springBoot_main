@@ -1,6 +1,7 @@
 package com.web.aop;
 
 import com.controller.Base;
+import com.model.User;
 import com.util.IPUtil;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
